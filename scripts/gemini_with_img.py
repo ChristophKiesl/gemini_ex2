@@ -39,6 +39,6 @@ response = model.generate_content([prompt, img_spec])
 print("\nresponse.text:\n")
 print(response.text)
 
-print("\nConvert respone to JSON:\")
+print("\nConvert respone to JSON:\n")
 import json
 print(json.dumps(response))
