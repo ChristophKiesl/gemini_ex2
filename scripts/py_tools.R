@@ -15,11 +15,15 @@ pip_install = function(args, py_bin = get_py_bin()) {
 
 
 
-py_run_script = function(file, dir = getwd(),py_bin = get_py_bin()) {
+py_run_script = function(file, args=list(), dir = getwd(),py_bin = get_py_bin()) {
   if (basename(file)==file) {
     file = file.path(dir, file)
   }
+
   cmd = paste0(py_bin, ' "',file,'"')
+  if (length(args)>0) {
+    cmd = paste0(cmd," ", paste0(unlist(args), collapse=" "))
+  }
   cat(cmd)
   system(cmd)
 }

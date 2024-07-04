@@ -2,7 +2,7 @@ if (!FALSE) {
   source("~/scripts/py_tools.R")
   print(normalizePath("~/scripts"))
   setwd("~/scripts")
-  py_run_script("gemini.py")
+  py_run_script("gemini.py",args=list(model="gemini-1.5-flash", json_mode=FALSE, temperature=0, prompt_file = "/root/prompts/prompt.txt",mime_type="image/png", img_file = "/root/prompts/cookie.png"))
 }
 
 
