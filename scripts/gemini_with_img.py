@@ -41,4 +41,4 @@ response = model.generate_content([prompt, img_spec])
 print("\nresponse.text:\n")
 print(response.text)
 
-pathlib.Path(out_file).write_text(respone.text)
+pathlib.Path(out_file).write_text(response.text)
