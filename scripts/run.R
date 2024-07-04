@@ -5,7 +5,7 @@ if (!FALSE) {
   out_file = file.path("~/gemini_temp/gemini_out.txt")
   setwd("~/scripts")
 
-  py_run_script("gemini_with_img.py",args=list(model="gemini-1.5-flash", json_mode=FALSE, temperature=0,out_file=out_file, prompt_file = "/root/prompts/prompt.txt",mime_type="image/png", img_file = "/root/prompts/cookie.png", out_file=out_file))
+  py_run_script("gemini_with_img.py",args=list(model="gemini-1.5-flash", json_mode=TRUE, temperature=0,out_file=out_file, prompt_file = "/root/prompts/prompt.txt",mime_type="image/png", img_file = "/root/prompts/cookie.png", out_file=out_file))
 
   if (!file.exists(out_file)) {
     cat("\nPython did not generate an output file")

@@ -1,1 +1,6 @@
-Does the image show a home-made cookie?
+Please describe the attached image and return a JSON file:
+
+{
+  "object": "what object is shown?",
+  "main_color": "main color in image"
+}
