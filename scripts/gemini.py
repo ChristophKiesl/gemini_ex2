@@ -14,8 +14,8 @@ prompt_file = sys.argv[4]
 mime_type = sys.argv[5]
 img_file = sys.argv[6]
 
-print 'model=', model_name
-print 'prompt_file=', prompt_file
+print ('model=', model_name)
+print ('prompt_file=', prompt_file)
 
 
 API_KEY = os.environ['API_KEY']
