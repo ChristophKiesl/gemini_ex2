@@ -1,5 +1,12 @@
-
 if (!FALSE) {
+  source("~/scripts/py_tools.R")
+  print(normalizePath("~/scripts"))
+  setwd("~/scripts")
+  py_run_script("gemini.py")
+}
+
+
+if (FALSE) {
   source("~/scripts/gemini_analysis.R")
   perform_analysis()
 }
@@ -22,5 +29,5 @@ try(writeLines(toJSON(res), "/root/output/result.json"))
 
 
 cat("\n\nEND TEST ANALYS\n\n")
-  
+
 }
