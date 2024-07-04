@@ -11,7 +11,7 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 
 cookie_picture = {
     'mime_type': 'image/png',
-    'data': pathlib.Path('/home/rstudio/repbox/gemini/gemini_py/cookie.png').read_bytes()
+    'data': pathlib.Path('/root/scripts/cookie.png').read_bytes()
 }
 prompt = "Do these look store-bought or homemade?"
 
