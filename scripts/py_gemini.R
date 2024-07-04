@@ -28,7 +28,7 @@ run_gemini_with_py = function(prompt_file, img_file=NULL, model="gemini-1.5-flas
 
 
   if (!dir.exists(out_dir)) dir.create(out_dir)
-  out_file = file.path("~/gemini_temp/gemini_out.txt")
+  out_file = file.path(out_dir, "gemini_out.txt")
 
   if (file.exists(out_file)) file.remove(out_file)
 
