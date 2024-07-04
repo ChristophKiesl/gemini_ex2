@@ -14,9 +14,9 @@ prompt_file = sys.argv[4]
 mime_type = sys.argv[5]
 img_file = sys.argv[6]
 
-print ('model=', model_name)
-print ('prompt_file=', prompt_file)
-print ('last_arg=', sys.argv[7])
+print ('\nmodel=', model_name)
+print ('\nprompt_file=', prompt_file)
+print ('\nimg_file=', img_file)
 
 
 API_KEY = os.environ['API_KEY']
@@ -30,7 +30,15 @@ img_spec = {
     'data': pathlib.Path(img_file).read_bytes()
 }
 
-prompt = Path('data.txt').read_text()
+prompt = Path(prompt_file).read_text()
+
+print("\nPrompt:\n", prompt)
 
 response = model.generate_content([prompt, img_spec])
+
+print("\nresponse.text:\n")
 print(response.text)
+
+print("\nConvert respone to JSON:\")
+import json
+print(json.dumps(response))
