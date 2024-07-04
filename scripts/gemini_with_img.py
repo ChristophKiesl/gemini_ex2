@@ -30,7 +30,7 @@ img_spec = {
     'data': pathlib.Path(img_file).read_bytes()
 }
 
-prompt = Path(prompt_file).read_text()
+prompt = pathlib.Path(prompt_file).read_text()
 
 print("\nPrompt:\n", prompt)
 
