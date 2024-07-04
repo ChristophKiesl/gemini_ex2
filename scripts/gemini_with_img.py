@@ -10,14 +10,16 @@ import sys
 model_name = sys.argv[1]
 json_mode = sys.argv[2]
 temperature = sys.argv[3]
-prompt_file = sys.argv[4]
-mime_type = sys.argv[5]
-img_file = sys.argv[6]
+out_file = sys.argv[4]
+prompt_file = sys.argv[5]
+mime_type = sys.argv[6]
+img_file = sys.argv[7]
+
 
 print ('\nmodel=', model_name)
 print ('\nprompt_file=', prompt_file)
 print ('\nimg_file=', img_file)
-
+print ('\nout_file=', out_file)
 
 API_KEY = os.environ['API_KEY']
 genai.configure(api_key=API_KEY)
@@ -39,6 +41,4 @@ response = model.generate_content([prompt, img_spec])
 print("\nresponse.text:\n")
 print(response.text)
 
-print("\nConvert respone to JSON:\n")
-import json
-print(json.dumps(response))
+pathlib.Path(out_file).write_text(respone.text)
