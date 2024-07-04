@@ -23,33 +23,35 @@ py_run_script = function(file, args=list(), dir = getwd(),py_bin = get_py_bin())
 }
 
 
-run_py_gemini = function(prompt_file, img_file=NULL, model="gemini-1.5-flash", json_mode=FALSE, temperature=0, add_prompt=FALSE, verbose=TRUE) {
-  library(httr)
+run_gemini_with_py = function(prompt_file, img_file=NULL, model="gemini-1.5-flash", json_mode=FALSE, temperature=0, add_prompt=FALSE, verbose=TRUE, out_dir = "~/gemini_temp") {
   library(jsonlite)
 
-  # Check the status code of the response
-  status_code = status_code(response)
 
-  # Output the content of the response
-  json = content(response, "text")
+  if (!dir.exists(out_dir)) dir.create(out_dir)
+  out_file = file.path("~/gemini_temp/gemini_out.txt")
 
-  if (verbose) {
-    cat("\n\nResult:\n",nchar(json), " characters:\n\n",json)
+  if (file.exists(out_file)) file.remove(out_file)
+
+  has_image = !is.null(img_file)
+  if (has_image) {
+    mime = tolower(tools::file_ext(img_file))
+    if (mime == "jpg") mime="jpeg"
+    mime_type = paste0("image/",mime)
+
+    py_run_script("gemini_with_img.py",args=list(model=model, json_mode=json_mode, temperature=temperature,out_file=out_file, prompt_file = prompt_file,mime_type=mime_type, img_file = img_file))
+  } else {
+    py_run_script("gemini_just_text.py",args=list(model=model, json_mode=json_mode, temperature=temperature,out_file=out_file, prompt_file = prompt_file))
   }
-  library(jsonlite)
-  res = try(fromJSON(json),silent = TRUE)
-  if (is(res, "try-error")) {
-    res = list(status_code = status_code,parse_error=TRUE, json=json)
+  res = list(model=model, json_mode=json_mode, temperature = temperature, parse_error=TRUE, content="")
+  if (!file.exists(out_file)) {
     return(res)
   }
-  res$status_code = status_code
+
   res$parse_error = FALSE
+  res$content = paste0(readLines(out_file, warn=FALSE), collapse="\n")
   if (add_prompt) {
     res$prompt = prompt
   }
-  res$model = model
-  res$json_mode = json_mode
-  res$temperature = temperature
   res
 
 }
