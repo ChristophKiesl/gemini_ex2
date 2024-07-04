@@ -24,12 +24,11 @@ print ('\nout_file=', out_file)
 API_KEY = os.environ['API_KEY']
 genai.configure(api_key=API_KEY)
 
-if (json_mode == "TRUE") {
+if (json_mode == "TRUE"): 
+  #config = GenerationConfig(temperature=temperature, response_mime_type="application/json")
   model = genai.GenerativeModel(model_name, generation_config={"response_mime_type": "application/json", "temperature": temperature})
-} else {
+else:
   model = genai.GenerativeModel(model_name, generation_config={ "temperature": temperature})
-  
-}
 
 
 img_spec = {
