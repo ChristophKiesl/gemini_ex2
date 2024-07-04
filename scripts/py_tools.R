@@ -5,7 +5,7 @@ example = function() {
 }
 
 get_py_bin = function() {
-  "~/.pyenv/versions/3.12.4/bin/python"
+  "python3"
 }
 
 pip_install = function(args, py_bin = get_py_bin()) {
@@ -16,7 +16,6 @@ pip_install = function(args, py_bin = get_py_bin()) {
 
 
 py_run_script = function(file, dir = getwd(),py_bin = get_py_bin()) {
-  restorepoint::restore.point("py_run_script")
   if (basename(file)==file) {
     file = file.path(dir, file)
   }
