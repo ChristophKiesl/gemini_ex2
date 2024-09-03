@@ -10,7 +10,7 @@ import sys
 model_name = sys.argv[1]
 json_mode = sys.argv[2]
 temperature = float(sys.argv[3])
-out_file = os.getenv('GITHUB_WORKSPACE', '')
+out_file = '/home/runner/work/gemini_ex2/gemini_ex2/output/'
 prompt_file = sys.argv[5]
 mime_type = "image/jpeg"
 
