@@ -4,11 +4,12 @@ example = function() {
   py_run_script("gemini.py")
 }
 
+#function: set python
 get_py_bin = function() {
   "python3"
 }
 
-
+#function: run the python script in cmd
 py_run_script = function(file, args=list(), dir = getwd(),py_bin = get_py_bin()) {
   if (basename(file)==file) {
     file = file.path(dir, file)
@@ -22,8 +23,8 @@ py_run_script = function(file, args=list(), dir = getwd(),py_bin = get_py_bin())
   system(cmd)
 }
 
-
-run_gemini_with_py = function(prompt_file, img_file=NULL, model="gemini-1.5-flash", json_mode=FALSE, temperature=0, add_prompt=FALSE, verbose=TRUE, out_dir = "~/gemini_temp") {
+#function: run py_run_script with eiter on of the python scripts (with or without picture)
+run_gemini_with_py = function(prompt_file, mime = "jpg", model="gemini-1.5-flash", json_mode=FALSE, temperature=0, add_prompt=FALSE, verbose=TRUE, out_dir = "~/gemini_temp") {
   library(jsonlite)
 
 
@@ -31,14 +32,16 @@ run_gemini_with_py = function(prompt_file, img_file=NULL, model="gemini-1.5-flas
   out_file = file.path(out_dir, "gemini_out.txt")
 
   if (file.exists(out_file)) file.remove(out_file)
-
-  has_image = !is.null(img_file)
+  
+  files <- list.files("../prompts")
+  jpeg_exists <- any(tolower(tools::file_ext(files)) == "jpeg" | tolower(tools::file_ext(files)) == "jpg")
+  
+  has_image = !is.null(jpeg_exists)
   if (has_image) {
-    mime = tolower(tools::file_ext(img_file))
-    if (mime == "jpg") mime="jpeg"
+    
     mime_type = paste0("image/",mime)
 
-    py_run_script("gemini_with_img.py",args=list(model=model, json_mode=json_mode, temperature=temperature,out_file=out_file, prompt_file = prompt_file,mime_type=mime_type, img_file = img_file))
+    py_run_script("gemini_with_img.py",args=list(model=model, json_mode=json_mode, temperature=temperature,out_file=out_file, prompt_file = prompt_file,mime_type=mime_type))
   } else {
     py_run_script("gemini_just_text.py",args=list(model=model, json_mode=json_mode, temperature=temperature,out_file=out_file, prompt_file = prompt_file))
   }
@@ -52,7 +55,7 @@ run_gemini_with_py = function(prompt_file, img_file=NULL, model="gemini-1.5-flas
   if (add_prompt) {
     res$prompt = prompt
   }
-  res
+  return(res)
 
 }
 

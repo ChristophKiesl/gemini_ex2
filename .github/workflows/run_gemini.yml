@@ -18,5 +18,4 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: gemini_results
-        path:  /root/temp_out/
-
+        path: ${{ github.workspace }}/output/

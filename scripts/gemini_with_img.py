@@ -12,7 +12,7 @@ json_mode = sys.argv[2]
 temperature = float(sys.argv[3])
 out_file = sys.argv[4]
 prompt_file = sys.argv[5]
-mime_type = "image/jpeg"
+mime_type = sys.argv[6]
 
 
 print('\nmodel=', model_name)

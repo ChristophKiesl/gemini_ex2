@@ -1,17 +1,19 @@
+#run Code
 if (!FALSE) {
   source("~/scripts/py_gemini.R")
   setwd("~/scripts")
 
-  res = run_gemini_with_py(prompt_file = "/root/prompts/prompt.txt",img_file = "/root/prompts/cookie.png", model="gemini-1.5-flash", json_mode=TRUE, temperature=0,out_dir = "/root/temp_out")
+  res = run_gemini_with_py(prompt_file = "/root/prompts/prompt.txt", json_mode=TRUE, temperature=0,out_dir = "/root/temp_out")
 
   cat("\nResults in R:\n")
   print(res)
-
+  
+  saveRDS(res, "/root/output/result.Rds")
 
 
 }
 
-
+#as in gemini_ex
 if (FALSE) {
   source("~/scripts/gemini_analysis.R")
   perform_analysis()
