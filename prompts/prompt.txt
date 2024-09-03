@@ -1,6 +1,3 @@
-Please describe the attached image and return a JSON file:
+In the paper "Fitzpatrick, T. B. (1975). Soleil et peau. Journal de Médecine Esthétique, 2(7), 33-34." the famous Fitzpatrick scale was presented. You are very good to apply this Fitzpatrick scale to pictures of persons and rate them on this scale. I have some pictures of different persons attatched. Could you please classify their skin type according to the Fitzpatrick scale, retrieve the name of the images and give me your assertation for the skintpye in a json file like this:
 
-{
-  "object": "what object is shown?",
-  "main_color": "main color in image"
-}
+[ { "image_name":"Name of the Image", "skin_type":"Skintype" }, { "next_image_name":"Name of the Image", "next_skin_type":"Skintype" } ]
