@@ -1,5 +1,6 @@
 import pathlib
 import textwrap
+import yaml
 
 import google.generativeai as genai
 import os
@@ -10,7 +11,7 @@ import sys
 model_name = sys.argv[1]
 json_mode = sys.argv[2]
 temperature = float(sys.argv[3])
-out_file = os.path.join(os.environ['GITHUB_WORKSPACE'], 'output', 'response.txt')
+out_file = os.getenv('GITHUB_WORKSPACE', '')
 prompt_file = sys.argv[5]
 mime_type = "image/jpeg"
 
