@@ -12,14 +12,12 @@ json_mode = sys.argv[2]
 temperature = float(sys.argv[3])
 out_file = sys.argv[4]
 prompt_file = sys.argv[5]
-mime_type = sys.argv[6]
-img_file = sys.argv[7]
+mime_type = "image/jpeg"
 
 
-print ('\nmodel=', model_name)
-print ('\nprompt_file=', prompt_file)
-print ('\nimg_file=', img_file)
-print ('\nout_file=', out_file)
+print('\nmodel=', model_name)
+print('\nprompt_file=', prompt_file)
+print('\nout_file=', out_file)
 
 API_KEY = os.environ['API_KEY']
 genai.configure(api_key=API_KEY)
@@ -31,16 +29,19 @@ else:
   model = genai.GenerativeModel(model_name, generation_config={ "temperature": temperature})
 
 
-img_spec = {
-    'mime_type': mime_type,
-    'data': pathlib.Path(img_file).read_bytes()
-}
+img_specs = []
+for img_path in pathlib.Path('./prompts').glob('*.jpg'):
+    img_spec = {
+        'mime_type': mime_type,
+        'data': img_path.read_bytes()
+    }
+    img_specs.append(img_spec)
 
 prompt = pathlib.Path(prompt_file).read_text()
 
 print("\nPrompt:\n", prompt)
 
-response = model.generate_content([prompt, img_spec])
+response = model.generate_content([prompt] + img_specs)
 
 print("\nresponse.text:\n")
 print(response.text)
