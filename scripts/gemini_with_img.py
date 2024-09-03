@@ -10,7 +10,7 @@ import sys
 model_name = sys.argv[1]
 json_mode = sys.argv[2]
 temperature = float(sys.argv[3])
-output_file = os.path.join(os.environ['GITHUB_WORKSPACE'], 'output', 'response.txt')
+out_file = os.path.join(os.environ['GITHUB_WORKSPACE'], 'output', 'response.txt')
 prompt_file = sys.argv[5]
 mime_type = "image/jpeg"
 
